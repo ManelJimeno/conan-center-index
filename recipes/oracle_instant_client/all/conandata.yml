@@ -1,0 +1,41 @@
+sources:
+  "23.7.0":
+    linux:
+      basic:
+        url:
+          - "https://download.oracle.com/otn_software/linux/instantclient/2370000/instantclient-basic-linux.x64-23.7.0.25.01.zip"
+        sha256: "42a8c3a3d124215a935de1f4a854d11b4550ec7842433fc46bdda47c1f19b7df"
+      sqlplus:
+        url:
+          - "https://download.oracle.com/otn_software/linux/instantclient/2370000/instantclient-sqlplus-linux.x64-23.7.0.25.01.zip"
+        sha256: "0e41ac407c4a51cb8e2754e698c8a9b04f631176c8537668c1803e114b578222"
+      sdk:
+        url:
+          - "https://download.oracle.com/otn_software/linux/instantclient/2370000/instantclient-sdk-linux.x64-23.7.0.25.01.zip"
+        sha256: "1f3a0ff568221662430ad2187db30e99d61c051f715c34b19cbaeff016293604"
+    windows:
+      basic:
+        url:
+          - "https://download.oracle.com/otn_software/nt/instantclient/2370000/instantclient-basic-windows.x64-23.7.0.25.01.zip"
+        sha256: "858b9bbe2f50c96b26e6b40b4d115a51e09a89eca784176398dbcb19adcc8ca0"
+      sqlplus:
+        url:
+          - "https://download.oracle.com/otn_software/nt/instantclient/2370000/instantclient-sqlplus-windows.x64-23.7.0.25.01.zip"
+        sha256: "247ad4398f02c4b6ad8a7a344f7c46b772f4899f3f048aaaa2c9a6f256e2fbb5"
+      sdk:
+        url:
+          - "https://download.oracle.com/otn_software/nt/instantclient/2370000/instantclient-sdk-windows.x64-23.7.0.25.01.zip"
+        sha256: "e5c68b19d8b4142d4a421a51fa4cb505fefe3e46c5ef1d7201b276ac60e3f1e5"
+    macos:
+      basic:
+        url:
+          - "https://download.oracle.com/otn_software/mac/instantclient/233023/instantclient-basic-macos.arm64-23.3.0.23.09-1.dmg"
+        sha256: "1bcddb583870f70c232d579edb8a32fd58497028a4eff1ad28ece0397ba8d7fe"
+      sqlplus:
+        url:
+          - "https://download.oracle.com/otn_software/mac/instantclient/233023/instantclient-sqlplus-macos.arm64-23.3.0.23.09.dmg"
+        sha256: "9213a399a13101bdebcd613027fa385ef44c42bba2330f9480b16db0e1a7d676"
+      sdk:
+        url:
+          - "https://download.oracle.com/otn_software/mac/instantclient/233023/instantclient-sdk-macos.arm64-23.3.0.23.09.dmg"
+        sha256: "3deadfce089eb6b9c091b1fd213ed7a66685bb22643c7c74be5e050ad8cfccbb"
