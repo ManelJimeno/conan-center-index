@@ -54,6 +54,7 @@ class QtConan(ConanFile):
         "with_libpng": [True, False],
         "with_sqlite3": [True, False],
         "with_mysql": [True, False],
+        "with_oracle": [True, False],
         "with_pq": [True, False],
         "with_odbc": [True, False],
         "with_zstd": [True, False],
@@ -99,6 +100,7 @@ class QtConan(ConanFile):
         "with_libpng": True,
         "with_sqlite3": True,
         "with_mysql": False,
+        "with_oracle": False,
         "with_pq": True,
         "with_odbc": True,
         "with_zstd": False,
@@ -371,6 +373,8 @@ class QtConan(ConanFile):
             self.requires("sqlite3/[>=3.45.0 <4]")
         if self.options.get_safe("with_mysql", False):
             self.requires("libmysqlclient/8.1.0")
+        if self.options.get_safe("with_oracle", False):
+            self.requires("oracle_instant_client/23.7.0")
         if self.options.with_pq:
             self.requires("libpq/15.4")
         if self.options.with_odbc:
@@ -569,6 +573,7 @@ class QtConan(ConanFile):
                               ("with_libjpeg", "jpeg"),
                               ("with_libpng", "png"),
                               ("with_sqlite3", "sqlite"),
+                              ("with_oracle", "oracle"),
                               ("with_pcre2", "pcre2"),]:
             if self.options.get_safe(opt, False):
                 if self.options.multiconfiguration:
@@ -1192,6 +1197,17 @@ class QtConan(ConanFile):
 
         if self.options.with_sqlite3:
             _create_plugin("QSQLiteDriverPlugin", "qsqlite", "sqldrivers", ["sqlite3::sqlite3"])
+        if self.options.with_oracle and self.settings.os != "Windows" and "OCI_INC_DIR" in os.environ and "OCI_LIB_DIR" in os.environ:
+            _create_plugin("QSQLiteDriverPlugin", "qoci", "sqldrivers", [])
+            self.cpp_info.components["qtQSQLiteDriverPlugin"].defines.append(f'Oracle_INCLUDE_DIR="{os.environ["OCI_INC_DIR"]}"')
+            self.cpp_info.components["qtQSQLiteDriverPlugin"].defines.append(f'Oracle_LIBRARY="{os.environ["OCI_LIB_DIR"]}"')
+
+            # Variables de entorno
+            self.components["qtQSQLiteDriverPlugin"].env_info.Oracle_INCLUDE_DIR = os.environ["OCI_INC_DIR"]
+            self.components["qtQSQLiteDriverPlugin"].env_info.Oracle_LIBRARY = os.path.join(os.environ["OCI_LIB_DIR"], "libclntsh.so")
+            self.components["qtQSQLiteDriverPlugin"].env_info.LD_LIBRARY_PATH.append(os.environ["OCI_LIB_DIR"])
+            self.components["qtQSQLiteDriverPlugin"].env_info.PATH.append(os.path.join(os.environ["ORACLE_HOME"], "bin"))
+
         if self.options.with_pq:
             _create_plugin("QPSQLDriverPlugin", "qsqlpsql", "sqldrivers", ["libpq::libpq"])
         if self.options.with_odbc:
